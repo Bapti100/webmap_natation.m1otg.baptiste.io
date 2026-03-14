@@ -1,0 +1,284 @@
+/* =============================================
+   IMPORTS ET VARIABLES GLOBALES
+============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #1E1E1E;
+    --secondary-color: #F4F4F4;
+    --accent-color: #FACC15;
+    --text-color: #333333;
+    --gray-color: #A0A0A0;
+    --background-color: #f8f9fa;
+    --white: #ffffff;
+    --border-color: #dddddd;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --border-radius: 5px;
+    --border-width: 1px;
+}
+
+/* =============================================
+   RESET ET STYLES DE BASE
+============================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    overflow-x: hidden;
+}
+
+/* =============================================
+   COMPOSANTS PRINCIPAUX
+============================================= */
+.box {
+    width: 95%;
+    max-width: 1800px;
+    margin: var(--spacing-md) auto;
+    background: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+h4 {
+    font-size: 1.8rem;
+    margin: 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--accent-color);
+    color: var(--primary-color);
+    display: inline-block;
+}
+
+.source-info {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+}
+
+.source-info a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.source-info a:hover {
+    text-decoration: underline;
+}
+
+/* =============================================
+   SECTION CARTE + GRAPHIQUE
+============================================= */
+.info_localisation {
+    display: flex;
+    gap: var(--spacing-md);
+    height: 65vh;
+}
+
+/* Conteneur carte : flex column pour empiler #map et #bookmark-bar */
+.carte_localisation {
+    flex: 2;
+    height: 100%;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#map {
+    flex: 1;          /* prend tout l'espace disponible au-dessus de la barre */
+    width: 100%;
+    min-height: 200px;
+}
+
+/* ─── BARRE DE GÉOSIGNETS ─── */
+#bookmark-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 10px;
+    background: var(--white);
+    border-top: var(--border-width) solid var(--border-color);
+    flex-shrink: 0;   /* ne se compresse pas quand la carte manque de place */
+}
+
+.bookmark-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border: 1.5px solid var(--primary-color);
+    border-radius: 20px;
+    background: var(--white);
+    color: var(--primary-color);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.bookmark-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.bookmark-btn.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.graphique {
+    flex: 1;
+    height: 100%;
+    background: var(--white);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: visible;
+}
+
+#graph {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+}
+
+/* =============================================
+   GRAPHIQUE D3.JS
+============================================= */
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    font-size: 12px;
+    z-index: 1000;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 600;
+    fill: #333;
+}
+
+.x-axis text {
+    display: none !important;
+}
+
+.bar {
+    transition: opacity 0.2s;
+}
+
+.bar:hover {
+    opacity: 0.8;
+}
+
+/* =============================================
+   PIED DE PAGE
+============================================= */
+footer {
+    text-align: center;
+    padding: var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    background-color: var(--secondary-color);
+    margin-top: auto;
+    width: 100%;
+}
+
+/* =============================================
+   RESPONSIVE DESIGN
+============================================= */
+@media (max-width: 768px), (orientation: portrait) {
+    .info_localisation {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .carte_localisation {
+        height: 50vh;
+        min-height: 300px;
+    }
+
+    .graphique {
+        height: 35vh;
+        min-height: 200px;
+        margin-bottom: var(--spacing-md);
+    }
+
+    h4 {
+        font-size: 1.5rem;
+    }
+
+    .title-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    /* Boutons plus petits sur mobile */
+    .bookmark-btn {
+        font-size: 0.7rem;
+        padding: 3px 9px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+    .carte_localisation {
+        height: 55vh;
+        min-height: 350px;
+    }
+
+    .graphique {
+        height: 40vh;
+        min-height: 250px;
+    }
+}
+
+@media (min-width: 1025px) and (orientation: landscape) {
+    .info_localisation {
+        flex-direction: row;
+        height: 65vh;
+    }
+
+    .carte_localisation,
+    .graphique {
+        height: 100%;
+    }
+}
+
+/* =============================================
+   UTILITAIRES
+============================================= */
+.error-message {
+    padding: var(--spacing-lg);
+    text-align: center;
+    color: #d32f2f;
+    background-color: #ffebee;
+    border-radius: var(--border-radius);
+}
