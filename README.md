@@ -2,7 +2,7 @@
 **Interactive mapping of the location of the swimming pools in France**  
 _M1 OTG • UNISTRA Strasbourg • 2025-2026_
 
-**Live demo**: https://bapti100.github.io/webmap.l3pro.baptiste.io/
+**Live demo**: [https://bapti100.github.io/webmap.l3pro.baptiste.io/](https://bapti100.github.io/webmap_natation.m1otg.baptiste.io/)
 
 ---
 
