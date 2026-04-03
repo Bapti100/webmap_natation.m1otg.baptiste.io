@@ -3,8 +3,8 @@ const densityLabels = {
     5: "urbain densité intermédiaire",
     4: "rural sous forte influence d'un pôle",
     3: "rural sous faible influence d'un pôle",
-    2: "rural autonome très peu dense",
-    1: "rural autonome peu dense"
+    2: "rural autonome peu dense",
+    1: "rural autonome très peu dense"
 };
 
 const densityColors = {

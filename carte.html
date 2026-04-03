@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NataCarto</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="box">
+    <div class="title-container">
+      <h4>NataCarto</h4>
+      <div class="source-info">
+        <p>Source des données de densité: <a
+            href="https://www.insee.fr/fr/statistiques/5039991?sommaire=5040030#onglet-2" target="_blank">INSEE</a></p>
+      </div>
+    </div>
+    <div class="info_localisation">
+      <div class="carte_localisation">
+        <div id="map"></div>
+        <div id="bookmark-bar"></div>
+      </div>
+      <div class="graphique" id="graph"></div>
+    </div>
+	    <!-- ─── BOUTON REDIRECTION ─── -->
+    <div class="btn-container">
+      <a href="index.html" class="btn-jaune">Voir la page infographie</a>
+    </div>
+	</div>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+  <script src="app.js"></script>
+
+  <footer>
+    <p>Site web réalisé par Fantou Baptiste dans le cadre d'un TP.</p>
+  </footer>
+</body>
+</html>

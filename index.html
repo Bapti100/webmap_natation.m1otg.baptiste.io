@@ -3,35 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NataCarto</title>
+  <title>NataCarto – Infographie</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css" rel="stylesheet" />
 </head>
 <body>
+
   <div class="box">
     <div class="title-container">
-      <h4>Les bassins de natation</h4>
+      <h4>NataCarto</h4>
       <div class="source-info">
-        <p>Source des données de densité: <a
-            href="https://www.insee.fr/fr/statistiques/5039991?sommaire=5040030#onglet-2" target="_blank">INSEE</a></p>
+        <p>Source des données de densité : <a href="https://www.insee.fr/fr/statistiques/5039991?sommaire=5040030#onglet-2" target="_blank">INSEE</a></p>
       </div>
     </div>
-    <div class="info_localisation">
-      <div class="carte_localisation">
-        <div id="map"></div>
-        <div id="bookmark-bar"></div>
-      </div>
-      <div class="graphique" id="graph"></div>
-    </div>
-  </div>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.js"></script>
-  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
-  <script src="app.js"></script>
+    <div class="info_localisation">
+
+      <!-- ─── IMAGE GAUCHE ─── -->
+      <div class="carte_localisation">
+        <div class="image-container">
+          <img
+            src="https://www.insee.fr/fr/statistiques/graphique/5039991/FST21_D4_figure5.png"
+            alt="Carte des communes de france selon l'insee"
+          />
+        </div>
+        <div class="image-caption">
+          Illustration – Catégories du rural et de l’urbain en France
+        </div>
+      </div>
+
+      <!-- ─── 3 GRAPHIQUES DROITE ─── -->
+      <div class="graphique" id="graphs-panel">
+        <div class="chart-wrapper" id="chart-population"></div>
+        <div class="chart-wrapper" id="chart-superficie"></div>
+        <div class="chart-wrapper" id="chart-bassins"></div>
+      </div>
+
+    </div>
+
+    <!-- ─── BOUTON REDIRECTION ─── -->
+    <div class="btn-container">
+      <a href="carte.html" class="btn-jaune">Voir la carte interactive</a>
+    </div>
+
+  </div>
 
   <footer>
     <p>Site web réalisé par Fantou Baptiste dans le cadre d'un TP.</p>
   </footer>
+
+  <!-- Tooltip partagé -->
+  <div class="tooltip" id="tooltip" style="opacity:0;"></div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="infographie.js"></script>
+
 </body>
 </html>

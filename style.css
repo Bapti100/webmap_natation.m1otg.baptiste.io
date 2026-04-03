@@ -2,7 +2,6 @@
    IMPORTS ET VARIABLES GLOBALES
 ============================================= */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
 :root {
     --primary-color: #1E1E1E;
     --secondary-color: #F4F4F4;
@@ -18,7 +17,6 @@
     --border-radius: 5px;
     --border-width: 1px;
 }
-
 /* =============================================
    RESET ET STYLES DE BASE
 ============================================= */
@@ -27,13 +25,11 @@
     margin: 0;
     padding: 0;
 }
-
 html, body {
     font-family: 'Poppins', sans-serif;
     color: var(--text-color);
     line-height: 1.5;
 }
-
 body {
     display: flex;
     flex-direction: column;
@@ -41,7 +37,6 @@ body {
     background-color: var(--background-color);
     overflow-x: hidden;
 }
-
 /* =============================================
    COMPOSANTS PRINCIPAUX
 ============================================= */
@@ -55,14 +50,12 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     flex: 1;
 }
-
 .title-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--spacing-md);
 }
-
 h4 {
     font-size: 1.8rem;
     margin: 0;
@@ -71,22 +64,18 @@ h4 {
     color: var(--primary-color);
     display: inline-block;
 }
-
 .source-info {
     font-size: 0.9rem;
     color: var(--gray-color);
 }
-
 .source-info a {
     color: var(--accent-color);
     text-decoration: none;
     transition: color 0.2s;
 }
-
 .source-info a:hover {
     text-decoration: underline;
 }
-
 /* =============================================
    SECTION CARTE + GRAPHIQUE
 ============================================= */
@@ -95,11 +84,11 @@ h4 {
     gap: var(--spacing-md);
     height: 65vh;
 }
-
 /* Conteneur carte : flex column pour empiler #map et #bookmark-bar */
 .carte_localisation {
     flex: 2;
     height: 100%;
+    min-height: 0;
     border: var(--border-width) solid var(--border-color);
     border-radius: var(--border-radius);
     background: var(--white);
@@ -107,13 +96,11 @@ h4 {
     flex-direction: column;
     overflow: hidden;
 }
-
 #map {
     flex: 1;          /* prend tout l'espace disponible au-dessus de la barre */
     width: 100%;
     min-height: 200px;
 }
-
 /* ─── BARRE DE GÉOSIGNETS ─── */
 #bookmark-bar {
     display: flex;
@@ -124,7 +111,6 @@ h4 {
     border-top: var(--border-width) solid var(--border-color);
     flex-shrink: 0;   /* ne se compresse pas quand la carte manque de place */
 }
-
 .bookmark-btn {
     font-family: 'Poppins', sans-serif;
     font-size: 0.75rem;
@@ -138,18 +124,15 @@ h4 {
     white-space: nowrap;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
-
 .bookmark-btn:hover {
     background: var(--primary-color);
     color: var(--white);
 }
-
 .bookmark-btn.active {
     background: var(--accent-color);
     border-color: var(--accent-color);
     color: var(--primary-color);
 }
-
 .graphique {
     flex: 1;
     height: 100%;
@@ -159,18 +142,16 @@ h4 {
     position: relative;
     overflow: visible;
 }
-
 #graph {
     width: 100%;
     height: 100%;
     min-height: 300px;
 }
-
 /* =============================================
    GRAPHIQUE D3.JS
 ============================================= */
 .tooltip {
-    position: absolute;
+    position: fixed;
     background: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 5px 10px;
@@ -178,26 +159,22 @@ h4 {
     pointer-events: none;
     font-size: 12px;
     z-index: 1000;
+    white-space: nowrap;
 }
-
 .title {
     font-size: 14px;
     font-weight: 600;
     fill: #333;
 }
-
 .x-axis text {
     display: none !important;
 }
-
 .bar {
     transition: opacity 0.2s;
 }
-
 .bar:hover {
     opacity: 0.8;
 }
-
 /* =============================================
    PIED DE PAGE
 ============================================= */
@@ -210,7 +187,6 @@ footer {
     margin-top: auto;
     width: 100%;
 }
-
 /* =============================================
    RESPONSIVE DESIGN
 ============================================= */
@@ -219,59 +195,74 @@ footer {
         flex-direction: column;
         height: auto;
     }
-
     .carte_localisation {
-        height: 50vh;
-        min-height: 300px;
+        width: 100%;
+        height: auto;          /* La boîte image s'adapte au contenu */
     }
-
+    .image-container {
+        flex: none;
+        width: 100%;
+        height: auto;          /* Pas de hauteur forcée */
+    }
+    .image-container img {
+        width: 100%;           /* Pleine largeur de l'écran */
+        height: auto;          /* Hauteur calculée depuis le ratio natif */
+    }
     .graphique {
-        height: 35vh;
-        min-height: 200px;
+        display: block;
+        width: 100%;
+        height: auto;
+        min-height: unset;
         margin-bottom: var(--spacing-md);
     }
-
+    .chart-wrapper {
+        flex: none;
+        width: 100%;
+        height: 200px;         /* Hauteur explicite garantie pour D3 */
+    }
     h4 {
         font-size: 1.5rem;
     }
-
     .title-container {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--spacing-sm);
     }
-
-    /* Boutons plus petits sur mobile */
     .bookmark-btn {
         font-size: 0.7rem;
         padding: 3px 9px;
     }
 }
-
 @media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
-    .carte_localisation {
-        height: 55vh;
-        min-height: 350px;
+    .image-container img {
+        width: 100%;
+        height: auto;
     }
-
-    .graphique {
-        height: 40vh;
-        min-height: 250px;
+    .chart-wrapper {
+        height: 250px;
     }
 }
-
-@media (min-width: 1025px) and (orientation: landscape) {
+@media (min-width: 769px) and (orientation: landscape) {
     .info_localisation {
         flex-direction: row;
         height: 65vh;
     }
-
     .carte_localisation,
     .graphique {
         height: 100%;
     }
+    .graphique {
+        display: flex;
+    }
+    .image-container {
+        flex: 1;
+        height: 100%;
+    }
+    .image-container img {
+        width: auto;
+        height: 100%;
+    }
 }
-
 /* =============================================
    UTILITAIRES
 ============================================= */
@@ -281,4 +272,77 @@ footer {
     color: #d32f2f;
     background-color: #ffebee;
     border-radius: var(--border-radius);
+}
+
+/* =============================================
+   BOUTON DE REDIRECTION
+============================================= */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+}
+
+.btn-jaune {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: var(--accent-color);
+    padding: 10px 32px;
+    border-radius: 20px;
+    text-decoration: none;
+    border: 2px solid var(--accent-color);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-jaune:hover {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    border-color: var(--primary-color);
+}
+
+/* Conteneur image (remplace #map dans infographie.html) */
+.image-container {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    min-height: 0; /* permet à flex de compresser le conteneur */
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Légende sous l'image */
+.image-caption {
+    padding: 8px 12px;
+    background: var(--white);
+    border-top: var(--border-width) solid var(--border-color);
+    font-size: 0.78rem;
+    color: var(--gray-color);
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Panneau droit : 3 graphiques empilés */
+.graphique {
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.chart-wrapper {
+    flex: 1;
+    position: relative;
+    border-bottom: var(--border-width) solid var(--border-color);
+    overflow: visible;
+}
+
+.chart-wrapper:last-child {
+    border-bottom: none;
 }
